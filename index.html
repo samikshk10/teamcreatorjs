@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bracket{
+            padding: 8px;
+            border: 1px solid black;
+            width: 200px;
+            
+        }
+
+      .bracket-left{
+        float:left;
+      }
+
+      .bracket-right{
+        float:right;
+      }
+      .bracket{
+        margin-bottom: 4px;
+      }
+
+      input[type=text]
+      {
+        padding: 10px;
+        
+      }
+
+      .whole-bracket{
+        margin-top: 20px;
+      }
+
+      input[type=submit]
+      {
+        padding: 13px 18px;
+     background-color: #f4c613;
+        border: none;   
+        border-radius: 20px;
+        cursor: pointer;
+        color: white;
+        opacity: 90%;
+      }
+
+      input[type=submit]:hover{
+        opacity:100%;
+      }
+
+      .title{
+        text-align:center;
+      }
+
+      #buttongo{
+        padding: 10px 20px;
+        background-color: green;
+        color: whitesmoke;
+        border: none;
+        border-radius: 20px;
+        margin: 10px 0;
+        cursor: pointer;
+        opacity: 90%;
+      }
+
+      #buttongo:hover{
+        opacity: 100%;
+      }
+
+      .teamcontainer{
+        margin-top: 10px;
+      }
+
+      .allforms{
+        margin-right: 18px;
+      }
+
+    
+    </style>
+</head>
+<body>
+    <h1 class="title">TEAM CREATOR</h1>   
+    
+        <form >
+    <input placeholder="Please Enter No. of Members" type="text" id="noofteams"  required>
+  <input type="submit" value="Submit" id="teams">
+</form>
+
+
+  
+  <div class="teamcontainer" id="team-container"><br>
+    
+  </div>
+  
+  <div id="gobutton"></div>
+
+
+<div class="whole-bracket" id="wholebracket">
+
+    <div class="bracket-left">
+     
+</div>
+
+
+<div class="bracket-right">
+</div>
+
+</div>
+
+<script>
+   
+    var num;
+
+            document.getElementById('teams').onclick=function(){
+    
+    num=+document.getElementById('noofteams').value;
+    if(num<=0 || num>100)
+    {
+        alert('invalid data');
+        return false;
+    }
+    var teamcontainer = document.getElementById("team-container");
+   var teamnumbers=document.getElementById('team-numbers');
+
+   teamcontainer.innerHTML="";
+    let i;
+    for(i=1;i<=num;i++)
+    {
+      
+        var labelteamname = document.createElement('label');
+        if(num<10)
+        {
+            labelteamname.innerHTML = "Name "+i+":   ";   
+            
+        }
+        if(num>=10)
+        {
+          if(i<10)
+          {
+            labelteamname.innerHTML = "Name "+"0"+i+":   ";   
+
+          }
+          else{
+            labelteamname.innerHTML = "Name "+i+":   ";   
+          }
+    }
+    
+   
+            teamcontainer.appendChild(labelteamname);
+        var newForm = document.createElement("input");
+        newForm.setAttribute("type", "text");
+        newForm.setAttribute("class","allforms");
+        newForm.setAttribute("id", "form"+i);
+        newForm.setAttribute("required", "");
+        teamcontainer.appendChild(newForm);
+        
+        if(i%4==0)
+        {
+        
+        teamcontainer.appendChild(document.createElement("br"));
+        teamcontainer.appendChild(document.createElement("br"));
+        }
+
+        
+        
+    }
+        var gobtn=document.getElementById('gobutton');
+        gobtn.innerHTML="";
+     var gobutton=document.createElement("button");
+     gobutton.setAttribute('id','buttongo');
+
+     gobutton.onclick=function()
+     {
+        // alert('get');
+        document.getElementById('wholebracket').innerHTML="";
+
+        var teambracket=document.createElement('div');
+        teambracket.setAttribute('id','teambrackets');
+        var arr = new Array();
+        for(let j=1;j<=num;j++)
+        {
+            var aa=document.getElementById('form'+j).value;
+            arr[j-1]=aa;
+            var aaaa=document.createElement('ul');
+            var ls=document.createElement('li');
+            aaaa.appendChild(ls);
+            ls.innerHTML=arr[j-1];
+            document.getElementById('wholebracket').appendChild(aaaa);
+
+            
+            // alert(arr[j-1]);
+            // console.log("yes");
+            // console.log(arr[j-1]);
+        }
+
+  
+
+
+     }
+     gobutton.innerHTML="GO";
+     gobtn.appendChild(gobutton);
+    return false;
+}
+
+
+
+
+</script>
+
+</body>
+</html>
