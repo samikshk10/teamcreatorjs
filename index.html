@@ -76,6 +76,15 @@
         margin-right: 18px;
       }
 
+      #createdtitle
+      {
+        text-align:center;
+        font-size: 20px;
+        display:none;
+      }
+
+
+
     
     </style>
 </head>
@@ -97,22 +106,20 @@
 
 
 <div class="whole-bracket" id="wholebracket">
-
-    <div class="bracket-left">
+    
      
 </div>
 
 
-<div class="bracket-right">
-</div>
 
-</div>
+
 
 <script>
    
     var num;
 
             document.getElementById('teams').onclick=function(){
+              document.getElementById('wholebracket').innerHTML="";
     
     num=+document.getElementById('noofteams').value;
     if(num<=0 || num>100)
@@ -165,15 +172,27 @@
         
         
     }
+
         var gobtn=document.getElementById('gobutton');
         gobtn.innerHTML="";
      var gobutton=document.createElement("button");
      gobutton.setAttribute('id','buttongo');
 
-     gobutton.onclick=function()
-     {
-        // alert('get');
-        document.getElementById('wholebracket').innerHTML="";
+
+     
+
+ 
+
+function gobuttonclicked(){
+   // alert('get');
+   var a1= document.getElementById('wholebracket');
+       a1.innerHTML="";
+        var title=document.createElement('h2');
+        title.innerHTML="Teams Names";
+        a1.appendChild(title);
+        
+
+        
 
         var teambracket=document.createElement('div');
         teambracket.setAttribute('id','teambrackets');
@@ -182,19 +201,40 @@
         {
             var aa=document.getElementById('form'+j).value;
             arr[j-1]=aa;
-            var aaaa=document.createElement('ul');
-            var ls=document.createElement('li');
-            aaaa.appendChild(ls);
-            ls.innerHTML=arr[j-1];
-            document.getElementById('wholebracket').appendChild(aaaa);
-
-            
+          
+                  
+            // const index = arr.indexOf(a);
+            //     if (index > -1) {
+            // arr.splice(index, 1);
+            //  }
             // alert(arr[j-1]);
             // console.log("yes");
             // console.log(arr[j-1]);
+            
         }
 
-  
+        for(let k=1;k<=num;k++)
+        {
+          
+          var aaaa=document.createElement('ul');
+            var ls=document.createElement('li');
+            aaaa.appendChild(ls);
+            let randomvalueindex=Math.floor(Math.random()*(arr.length));
+            ls.innerHTML=arr[randomvalueindex];
+            arr.splice(randomvalueindex,1);
+document.getElementById('wholebracket').appendChild(aaaa);
+        }
+
+        
+}
+
+
+     gobutton.onclick=function()
+     {
+
+       gobuttonclicked();
+
+
 
 
      }
